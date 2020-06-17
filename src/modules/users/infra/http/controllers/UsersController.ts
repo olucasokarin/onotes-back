@@ -4,10 +4,6 @@ import { container } from 'tsyringe';
 import CreateUserService from '@modules/users/services/CreateUserService';
 
 export default class UsersController {
-  public async show(request: Request, response: Response): Promise<Response> {
-    return response.json({ message: 'ola mundo' });
-  }
-
   public async create(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
