@@ -14,7 +14,7 @@ export default class CreateCategory1592356389720 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'category_name',
+            name: 'name',
             type: 'varchar',
           },
           {
@@ -34,7 +34,7 @@ export default class CreateCategory1592356389720 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'UserCateogry',
+            name: 'UserCategory',
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['user_id'],
