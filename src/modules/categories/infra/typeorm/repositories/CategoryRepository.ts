@@ -20,6 +20,17 @@ class CategoryRepository implements ICategoryReposity {
 
     return category;
   }
+
+  public async findByUserId(userId: string): Promise<Category[]> {
+    const categories = await this.ormRepository.find({
+      where: { userId },
+      order: {
+        updatedAt: 'DESC',
+      },
+    });
+
+    return categories;
+  }
 }
 
 export default CategoryRepository;
