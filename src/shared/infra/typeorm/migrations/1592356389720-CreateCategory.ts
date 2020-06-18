@@ -21,6 +21,7 @@ export default class CreateCategory1592356389720 implements MigrationInterface {
             name: 'user_id',
             type: 'uuid',
           },
+
           {
             name: 'created_at',
             type: 'varchar',

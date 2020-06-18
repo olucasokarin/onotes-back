@@ -3,5 +3,9 @@ import ICreateCategoryDTO from '../dto/ICreateCategoryDTO';
 
 export default interface ICategoryReposity {
   create({ name, userId }: ICreateCategoryDTO): Promise<Category>;
-  findByUserId(userId: string): Promise<Category[]>;
+  findAllCategories(userId: string): Promise<Category[]>;
+  findCategory(
+    userId: string,
+    categoryId: string,
+  ): Promise<Category | undefined>;
 }

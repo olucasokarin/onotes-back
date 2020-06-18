@@ -42,7 +42,7 @@ export default class CreateNote1592366941166 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'UserCategoryFromNote',
+            name: 'UserNote',
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['user_id'],

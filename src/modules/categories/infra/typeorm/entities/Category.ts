@@ -6,8 +6,10 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import User from '@modules/users/infra/typeorm/entities/User';
+import Note from '@modules/notes/infra/typeorm/entities/Note';
 
 @Entity('categories')
 class Category {
@@ -23,6 +25,9 @@ class Category {
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => Note, note => note.category)
+  notes: Note[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

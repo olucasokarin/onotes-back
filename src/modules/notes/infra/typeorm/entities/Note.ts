@@ -30,11 +30,12 @@ class Note {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  // section from category
+  // section from user
+
   @Column({ name: 'category_id' })
   categoryId: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
   category: Category;
 

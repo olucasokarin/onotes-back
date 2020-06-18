@@ -14,9 +14,20 @@ class FakeCategoryRepository implements ICategoryReposity {
     return category;
   }
 
-  public async findByUserId(userId: string): Promise<Category[]> {
+  public async findAllCategories(userId: string): Promise<Category[]> {
     const findCategory = this.categories.filter(
       category => category.userId === userId,
+    );
+
+    return findCategory;
+  }
+
+  public async findCategory(
+    userId: string,
+    categoryId: string,
+  ): Promise<Category | undefined> {
+    const findCategory = this.categories.find(
+      category => category.id === categoryId,
     );
 
     return findCategory;

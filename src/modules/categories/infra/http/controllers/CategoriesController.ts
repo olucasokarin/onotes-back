@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateCategoryService from '@modules/categories/services/CreateCategoryService';
 import ListCategoryService from '@modules/categories/services/ListCategoryService';
+import ShowCategoryService from '@modules/categories/services/ShowCategoryService';
 
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -15,7 +16,7 @@ export default class UsersController {
     return response.json(user);
   }
 
-  public async show(request: Request, response: Response): Promise<Response> {
+  public async list(request: Request, response: Response): Promise<Response> {
     const userId = request.user.id;
 
     const listCategory = container.resolve(ListCategoryService);
@@ -23,5 +24,16 @@ export default class UsersController {
     const categories = await listCategory.execute(userId);
 
     return response.json(categories);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const userId = request.user.id;
+    const { categoryId } = request.params;
+
+    const showCategory = container.resolve(ShowCategoryService);
+
+    const category = await showCategory.execute(userId, categoryId);
+
+    return response.json(category);
   }
 }

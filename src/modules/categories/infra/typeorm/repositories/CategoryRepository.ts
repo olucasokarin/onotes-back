@@ -1,6 +1,6 @@
 import ICategoryReposity from '@modules/categories/repositories/ICategoryReposity';
 import ICreateCategoryDTO from '@modules/categories/dto/ICreateCategoryDTO';
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, JoinOptions } from 'typeorm';
 import Category from '../entities/Category';
 
 class CategoryRepository implements ICategoryReposity {
@@ -21,7 +21,7 @@ class CategoryRepository implements ICategoryReposity {
     return category;
   }
 
-  public async findByUserId(userId: string): Promise<Category[]> {
+  public async findAllCategories(userId: string): Promise<Category[]> {
     const categories = await this.ormRepository.find({
       where: { userId },
       order: {
@@ -30,6 +30,24 @@ class CategoryRepository implements ICategoryReposity {
     });
 
     return categories;
+  }
+
+  public async findCategory(
+    userId: string,
+    categoryId: string,
+  ): Promise<Category | undefined> {
+    const findCategory = this.ormRepository.findOne({
+      where: { userId, id: categoryId },
+      relations: ['notes'],
+    });
+
+    // using query builder
+    // const findCategory = this.ormRepository
+    //   .createQueryBuilder('category')
+    //   .leftJoinAndSelect('category.notes', 'note')
+    //   .getOne();
+
+    return findCategory;
   }
 }
 

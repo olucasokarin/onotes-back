@@ -10,7 +10,7 @@ class ListCategoryService {
   ) {}
 
   public async execute(userId: string): Promise<Category[]> {
-    const categories = this.categoriesRepository.findByUserId(userId);
+    const categories = this.categoriesRepository.findAllCategories(userId);
 
     return categories;
   }
