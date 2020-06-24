@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import CreateNoteService from '@modules/notes/services/CreateNoteService';
 import ListNotesService from '@modules/notes/services/ListNotesService';
 import ShowNoteService from '@modules/notes/services/ShowNoteService';
+import UpdateNoteService from '@modules/notes/services/UpdateNoteService';
 
 export default class NotesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -33,12 +34,25 @@ export default class NotesController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    // const userId = request.user.id;
     const { noteId } = request.params;
+
+    console.log(noteId);
 
     const showNote = container.resolve(ShowNoteService);
 
     const note = await showNote.execute(noteId);
+
+    return response.json(note);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    // const userId = request.user.id;
+    const { noteId } = request.params;
+    const { name, content } = request.body;
+
+    const updateNote = container.resolve(UpdateNoteService);
+
+    const note = await updateNote.execute({ noteId, name, content });
 
     return response.json(note);
   }

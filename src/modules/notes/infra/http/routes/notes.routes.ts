@@ -10,6 +10,7 @@ notesRouter.use(ensureAuthentication);
 
 notesRouter.post('/', notesController.create);
 notesRouter.get('/', notesController.list);
-notesRouter.get('/:id', notesController.show);
+notesRouter.get('/:noteId', notesController.show);
+notesRouter.put('/:noteId', notesController.update);
 
 export default notesRouter;

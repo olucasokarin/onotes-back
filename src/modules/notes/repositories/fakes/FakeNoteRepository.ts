@@ -15,6 +15,14 @@ class FakeNoteRepository implements INotesReposity {
     return note;
   }
 
+  public async save(note: Note): Promise<Note> {
+    const findIndex = this.notes.findIndex(findNote => findNote.id === note.id);
+
+    this.notes[findIndex] = note;
+
+    return note;
+  }
+
   public async findNoteById(noteId: string): Promise<Note | undefined> {
     const findNote = this.notes.find(note => note.id === noteId);
 
