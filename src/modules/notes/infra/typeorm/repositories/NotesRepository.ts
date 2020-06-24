@@ -19,6 +19,12 @@ class NotesRepository implements INotesReposity {
     return note;
   }
 
+  public async findNoteById(noteId: string): Promise<Note | undefined> {
+    const findNote = this.ormRepository.findOne(noteId);
+
+    return findNote;
+  }
+
   public async findAllNotes({
     userId,
     categoryId,
