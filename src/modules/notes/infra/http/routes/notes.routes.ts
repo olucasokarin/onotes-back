@@ -9,6 +9,6 @@ const notesController = new NotesController();
 notesRouter.use(ensureAuthentication);
 
 notesRouter.post('/', notesController.create);
-// notesRouter.get('/', notesController.show);
+notesRouter.get('/', notesController.list);
 
 export default notesRouter;

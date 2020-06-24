@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateNoteService from '@modules/notes/services/CreateNoteService';
+import ListNotesService from '@modules/notes/services/ListNotesService';
 
 export default class NotesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -19,13 +20,14 @@ export default class NotesController {
     return response.json(user);
   }
 
-  // public async show(request: Request, response: Response): Promise<Response> {
-  //   const userId = request.user.id;
+  public async list(request: Request, response: Response): Promise<Response> {
+    const userId = request.user.id;
+    const { categoryId } = request.query;
 
-  //   const listCategory = container.resolve(ListCategoryService);
+    const listNotes = container.resolve(ListNotesService);
 
-  //   const categories = await listCategory.execute(userId);
+    const notes = await listNotes.execute({ userId, categoryId });
 
-  //   return response.json(categories);
-  // }
+    return response.json(notes);
+  }
 }

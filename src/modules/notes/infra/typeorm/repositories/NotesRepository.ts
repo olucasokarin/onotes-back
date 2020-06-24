@@ -1,6 +1,7 @@
 import { Repository, getRepository } from 'typeorm';
 import ICreateNoteDTO from '@modules/notes/dto/ICreateNoteDTO';
 import INotesReposity from '@modules/notes/repositories/INotesReposity';
+import IListNotesDTO from '@modules/notes/dto/IListNotesDTO';
 import Note from '../entities/Note';
 
 class NotesRepository implements INotesReposity {
@@ -16,6 +17,23 @@ class NotesRepository implements INotesReposity {
     await this.ormRepository.save(note);
 
     return note;
+  }
+
+  public async findAllNotes({
+    userId,
+    categoryId,
+  }: IListNotesDTO): Promise<Note[]> {
+    const notes = this.ormRepository.find({
+      where: {
+        userId,
+        categoryId,
+      },
+      order: {
+        updatedAt: 'DESC',
+      },
+    });
+
+    return notes;
   }
 }
 

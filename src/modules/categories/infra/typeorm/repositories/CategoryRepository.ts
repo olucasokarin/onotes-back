@@ -1,6 +1,6 @@
 import ICategoryReposity from '@modules/categories/repositories/ICategoryReposity';
 import ICreateCategoryDTO from '@modules/categories/dto/ICreateCategoryDTO';
-import { Repository, getRepository, JoinOptions } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import Category from '../entities/Category';
 
 class CategoryRepository implements ICategoryReposity {
@@ -38,14 +38,8 @@ class CategoryRepository implements ICategoryReposity {
   ): Promise<Category | undefined> {
     const findCategory = this.ormRepository.findOne({
       where: { userId, id: categoryId },
-      relations: ['notes'],
+      // relations: ['notes'],
     });
-
-    // using query builder
-    // const findCategory = this.ormRepository
-    //   .createQueryBuilder('category')
-    //   .leftJoinAndSelect('category.notes', 'note')
-    //   .getOne();
 
     return findCategory;
   }
