@@ -1,6 +1,6 @@
 import FakeNoteRepository from '@modules/notes/repositories/fakes/FakeNoteRepository';
 import FakeCategoryRepository from '@modules/categories/repositories/fakes/FakeCategoryReposity';
-// import AppError from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
 import UpdateNoteService from './UpdateNoteService';
 
 let fakeCategoryRepository: FakeCategoryRepository;
@@ -36,5 +36,15 @@ describe('UpdateNote', () => {
 
     expect(response.name).toBe('new note');
     expect(response.content).toBe('new content');
+  });
+
+  it('should not be able do update note', async () => {
+    await expect(
+      updateNote.execute({
+        noteId: 'non existing note id',
+        name: 'new note',
+        content: 'new content',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
