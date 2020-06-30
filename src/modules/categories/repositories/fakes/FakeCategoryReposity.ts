@@ -32,6 +32,33 @@ class FakeCategoryRepository implements ICategoryReposity {
 
     return findCategory;
   }
+
+  public async save(category: Category): Promise<Category> {
+    const findIndex = this.categories.findIndex(
+      findcategory => findcategory.id === category.id,
+    );
+
+    this.categories[findIndex] = category;
+
+    return category;
+  }
+
+  public async findCategoryById(
+    categoryId: string,
+  ): Promise<Category | undefined> {
+    const findcategory = this.categories.find(
+      category => category.id === categoryId,
+    );
+
+    return findcategory;
+  }
+
+  public async delete(categoryId: string): Promise<void> {
+    const findIndex = this.categories.findIndex(
+      findcategory => findcategory.id === categoryId,
+    );
+    this.categories = this.categories.splice(findIndex);
+  }
 }
 
 export default FakeCategoryRepository;

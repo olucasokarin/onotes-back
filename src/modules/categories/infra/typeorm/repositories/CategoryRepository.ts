@@ -21,6 +21,18 @@ class CategoryRepository implements ICategoryReposity {
     return category;
   }
 
+  public async save(category: Category): Promise<Category> {
+    return this.ormRepository.save(category);
+  }
+
+  public async findCategoryById(
+    categoryId: string,
+  ): Promise<Category | undefined> {
+    const findCategory = this.ormRepository.findOne(categoryId);
+
+    return findCategory;
+  }
+
   public async findAllCategories(userId: string): Promise<Category[]> {
     const categories = await this.ormRepository.find({
       where: { userId },
@@ -42,6 +54,10 @@ class CategoryRepository implements ICategoryReposity {
     });
 
     return findCategory;
+  }
+
+  public async delete(categoryId: string): Promise<void> {
+    await this.ormRepository.delete(categoryId);
   }
 }
 

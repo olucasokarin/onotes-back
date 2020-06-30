@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import CreateCategoryService from '@modules/categories/services/CreateCategoryService';
 import ListCategoryService from '@modules/categories/services/ListCategoryService';
 import ShowCategoryService from '@modules/categories/services/ShowCategoryService';
+import UpdateCategoryService from '@modules/categories/services/UpdateCategoryService';
 
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -33,6 +34,18 @@ export default class UsersController {
     const showCategory = container.resolve(ShowCategoryService);
 
     const category = await showCategory.execute(userId, categoryId);
+
+    return response.json(category);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    // const userId = request.user.id;
+    const { categoryId } = request.params;
+    const { name } = request.body;
+
+    const updateCategory = container.resolve(UpdateCategoryService);
+
+    const category = await updateCategory.execute({ categoryId, name });
 
     return response.json(category);
   }

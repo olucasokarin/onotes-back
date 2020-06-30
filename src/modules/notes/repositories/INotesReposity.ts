@@ -7,5 +7,5 @@ export default interface INotesReposity {
   findNoteById(noteId: string): Promise<Note | undefined>;
   create(dataNote: ICreateNoteDTO): Promise<Note>;
   findAllNotes(dataListNote: IListNotesDTO): Promise<Note[]>;
-  delete(noteId: string): Promise<Note>;
+  delete(noteId: string): Promise<void>;
 }

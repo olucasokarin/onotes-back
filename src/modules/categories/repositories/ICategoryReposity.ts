@@ -8,4 +8,8 @@ export default interface ICategoryReposity {
     userId: string,
     categoryId: string,
   ): Promise<Category | undefined>;
+
+  save(category: Category): Promise<Category | undefined>;
+  findCategoryById(categoryId: string): Promise<Category | undefined>;
+  delete(categoryId: string): Promise<void>;
 }

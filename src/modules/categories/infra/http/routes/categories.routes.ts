@@ -11,5 +11,6 @@ categoriesRouter.use(ensureAuthentication);
 categoriesRouter.post('/', categoriesController.create);
 categoriesRouter.get('/', categoriesController.list);
 categoriesRouter.get('/:categoryId', categoriesController.show);
+categoriesRouter.put('/:categoryId', categoriesController.update);
 
 export default categoriesRouter;
