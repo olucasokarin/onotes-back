@@ -12,5 +12,6 @@ notesRouter.post('/', notesController.create);
 notesRouter.get('/', notesController.list);
 notesRouter.get('/:noteId', notesController.show);
 notesRouter.put('/:noteId', notesController.update);
+notesRouter.delete('/:noteId', notesController.delete);
 
 export default notesRouter;

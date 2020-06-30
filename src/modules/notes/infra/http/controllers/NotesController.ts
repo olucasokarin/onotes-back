@@ -4,6 +4,7 @@ import CreateNoteService from '@modules/notes/services/CreateNoteService';
 import ListNotesService from '@modules/notes/services/ListNotesService';
 import ShowNoteService from '@modules/notes/services/ShowNoteService';
 import UpdateNoteService from '@modules/notes/services/UpdateNoteService';
+import DeleteNoteService from '@modules/notes/services/DeleteNoteService';
 
 export default class NotesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -55,5 +56,15 @@ export default class NotesController {
     const note = await updateNote.execute({ noteId, name, content });
 
     return response.json(note);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { noteId } = request.params;
+
+    const deleteNote = container.resolve(DeleteNoteService);
+
+    await deleteNote.execute(noteId);
+
+    return response.json();
   }
 }

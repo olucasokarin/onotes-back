@@ -45,6 +45,10 @@ class NotesRepository implements INotesReposity {
 
     return notes;
   }
+
+  public async delete(noteId: string): Promise<Note> {
+    return this.ormRepository.delete(noteId);
+  }
 }
 
 export default NotesRepository;

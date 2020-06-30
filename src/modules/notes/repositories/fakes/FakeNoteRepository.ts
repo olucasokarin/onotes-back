@@ -39,6 +39,11 @@ class FakeNoteRepository implements INotesReposity {
 
     return findAllNotes;
   }
+
+  public async delete(noteId: string): Promise<void> {
+    const findIndex = this.notes.findIndex(findNote => findNote.id === noteId);
+    this.notes = this.notes.splice(findIndex);
+  }
 }
 
 export default FakeNoteRepository;
