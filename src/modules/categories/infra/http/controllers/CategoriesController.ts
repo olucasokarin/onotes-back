@@ -4,6 +4,7 @@ import CreateCategoryService from '@modules/categories/services/CreateCategorySe
 import ListCategoryService from '@modules/categories/services/ListCategoryService';
 import ShowCategoryService from '@modules/categories/services/ShowCategoryService';
 import UpdateCategoryService from '@modules/categories/services/UpdateCategoryService';
+import DeleteCategoryService from '@modules/categories/services/DeleteCategoryService';
 
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -48,5 +49,15 @@ export default class UsersController {
     const category = await updateCategory.execute({ categoryId, name });
 
     return response.json(category);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { categoryId } = request.params;
+
+    const deleteCategory = container.resolve(DeleteCategoryService);
+
+    await deleteCategory.execute(categoryId);
+
+    return response.json();
   }
 }

@@ -28,7 +28,7 @@ describe('DeleteNote', () => {
       categoryId: category.id,
     });
 
-    const response = await deleteNote.execute(note.id);
+    await deleteNote.execute(note.id);
   });
 
   it('should not be able do show note', async () => {

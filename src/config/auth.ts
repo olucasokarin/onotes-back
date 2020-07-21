@@ -1,6 +1,9 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
 export default {
   jwt: {
-    secret: 'on_moment_only_test',
+    secret: process.env.APP_SECRET || 'uu',
     expiresIn: '1d',
   },
 };
