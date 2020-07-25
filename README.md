@@ -68,5 +68,5 @@ E resolvi desenvolver meu próprio projeto para tal, sendo que ainda terá um ap
 
  ## Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
